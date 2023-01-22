@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block main %}
+  <h1 class="mb-5">Straipsniai</h1>
+
+    {% if current_user.is_authenticated %}
+      <h2 class="mb-5">Hello, {{ current_user.email }}</h2>
+    {% endif %}
+
+  {% for article in articles %}
+    <div class="mb-5">
+    {% if article.status.value == StatusType.PUBLISHED.value %}
+      <h2>{{ article.title }}
+        {% for tag in article.tags %}
+          <span class="badge bg-secondary">{{ tag.name }}</span>
+        {% endfor %}
+      </h2>
+      <h3>{{ article.date }}, {{ article.author.first_name }} {{ article.author.last_name }}</h3>
+      <hr>
+      <p>{{ article.text[:20] }}...<a href="{{ url_for('article', id=article.id)}}">skaityti toliau</a></p>
+    {% else %}
+      <h2>{{ article.title }} - <i>Publikavimas laikinai išjungtas</i>
+        {% for tag in article.tags %}
+          <span class="badge bg-secondary">{{ tag.name }}</span>
+        {% endfor %}
+      </h2>
+    {% endif %}
+    </div>
+  {% endfor %}
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+          <li class="page-item {{ '' if articles.has_prev else 'disabled' }}">
+              <a class="page-link" href="{{ url_for('home', page=articles.prev_num) }}">Ankstesnis</a>
+            </li>
+          {% for page_num in articles.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+              {% if page_num %}
+                    <li class="page-item {{ 'active' if articles.page == page_num else '' }}"><a class="page-link" href="{{ url_for('home', page=page_num) }}">{{ page_num }}</a></li>
+              {% endif %}
+          {% endfor %}
+          <li class="page-item {{ '' if articles.has_next else 'disabled' }}">
+              <a class="page-link" href="{{ url_for('home', page=articles.next_num) }}">Kitas</a>
+            </li>
+      </ul>
+    </nav>
+
+
+  {% if current_user.is_authenticated %}
+  <a href="{{ url_for('add_article')}}">Pridėti straipsnį</a>
+  {% endif %}
+{% endblock %}

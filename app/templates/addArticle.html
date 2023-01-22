@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}Add article{% endblock %}
+
+{% block main %}
+<form action="{{ url_for('add_article')}}" method="POST" novalidate>
+  {{ form.hidden_tag() }}
+  <div class="row gy-3">
+    <div class="col-md-6">
+      {{ form.author.label(class="form-label") }}
+      {{ form.author(class="form-select") }}
+      {% for error in form.author.errors %}
+      <div style="color: red">
+        {{ error }}
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="col-md-6">
+      {{ form.tags.label(class="form-label") }}
+      {{ form.tags(class="form-select") }}
+      {% for error in form.tags.errors %}
+      <div style="color: red">
+        {{ error }}
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="col-md-6">
+      {{ form.title.label(class="form-label") }}
+      {{ form.title(class="form-control") }}
+      {% for error in form.title.errors %}
+      <div style="color: red">
+        {{ error }}
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="col-md-3">
+      {{ form.date.label(class="form-label") }}
+      {{ form.date(class="form-control") }}
+      {% for error in form.date.errors %}
+      <div style="color: red">
+        {{ error }}
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="col-md-3">
+      {{ form.text.label(class="form-label") }}
+      {{ form.text(class="form-control") }}
+      {% for error in form.text.errors %}
+      <div style="color: red">
+        {{ error }}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <button class="btn btn-primary mt-3" type="submit">Išsaugoti</button>
+
+</form>
+{% endblock %}

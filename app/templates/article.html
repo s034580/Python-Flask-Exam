@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ article['pavadinimas'] }}{% endblock %}
+
+{% block main %}
+  <div class="mb-5">
+  {% if article.status.value == StatusType.PUBLISHED.value %}
+    <h1>{{ article.title }}
+      {% for tag in article.tags %}
+        <span class="badge bg-secondary">{{ tag.name }}</span>
+      {% endfor %}
+    </h1>
+    <h3>{{ article.date }}, {{ article.author.first_name }} {{ article.author.last_name }}</h3>
+    <hr>
+    <p>{{ article.text }}</p>
+  {% else %}
+    <h2>{{ article.title }} - <i>Publikavimas laikinai išjungtas</i></h2>
+  {% endif %}
+  </div>
+{% endblock %}
