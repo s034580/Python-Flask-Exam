@@ -6,6 +6,7 @@ from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
 from flask_mail import Mail
 
+
 base_dir = os.path.dirname(__file__)
 
 app = Flask(__name__)
@@ -14,6 +15,7 @@ app.config.from_prefixed_env()
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'data.db')
+app.config['SECRET_KEY'] = 'asdpasjdoaisd'
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)

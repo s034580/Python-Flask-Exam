@@ -19,7 +19,7 @@
       </h2>
       <h3>{{ article.date }}, {{ article.author.first_name }} {{ article.author.last_name }}</h3>
       <hr>
-      <p>{{ article.text[:20] }}...<a href="{{ url_for('article', id=article.id)}}">skaityti toliau</a></p>
+      <p>{{ article.text[:20] }}...<a href="{{ url_for('registration') }}">Išbandyk</a></p>
     {% else %}
       <h2>{{ article.title }} - <i>Publikavimas laikinai išjungtas</i>
         {% for tag in article.tags %}
