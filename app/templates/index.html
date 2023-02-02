@@ -3,7 +3,7 @@
 {% block title %}Home{% endblock %}
 
 {% block main %}
-  <h1 class="mb-5">Straipsniai</h1>
+  <h1 class="mb-5">Sąskaitininkas</h1>
 
     {% if current_user.is_authenticated %}
       <h2 class="mb-5">Hello, {{ current_user.email }}</h2>
@@ -19,7 +19,9 @@
       </h2>
       <h3>{{ article.date }}, {{ article.author.first_name }} {{ article.author.last_name }}</h3>
       <hr>
-      <p>{{ article.text[:20] }}...<a href="{{ url_for('registration') }}">Išbandyk</a></p>
+      <p>Susitikai su draugais bare, praleidai gerai laiką ir nuspredėt, kad apmokėsi sąskaitą ir kitą kartą ją visi apmokėsit.
+        Atėjo laikas kai reikia mokėti, per pamiršai kiek išleidai... Nebėdau, tau padės "Sąskaitininkas"!!!!. Suvesk visas sąskaitas čia ir peržiūrėk jas vėliau <a href="{{ url_for('registration') }}">Išbandyk Sąskaitininką</a>
+      </p>
     {% else %}
       <h2>{{ article.title }} - <i>Publikavimas laikinai išjungtas</i>
         {% for tag in article.tags %}
